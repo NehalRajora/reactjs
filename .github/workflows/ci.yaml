@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install project dependencies 
-        working-directory: ./quiz-application
+        working-directory: ./quiz-app
         run: |
           npm i
           npm run lint
@@ -34,7 +34,7 @@ jobs:
 
       - name: Build
         run: npm run build
-        working-directory: ./quiz-application
+        working-directory: ./quiz-app
 
               # Setup sonar-scanner
       - name: Setup SonarQube
