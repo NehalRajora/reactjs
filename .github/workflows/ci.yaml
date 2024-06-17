@@ -1,7 +1,7 @@
 name: React.js CI
 
 on:
- 
+ #
   pull_request:
     branches: "master"
 
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./quiz-app
+        working-directory: ./quiz-application
     strategy:
       matrix:
         node-version: [20.x]
@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install project dependencies 
-        working-directory: ./quiz-app
+        working-directory: ./quiz-application
         run: |
           npm i
           npm run lint
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build
         run: npm run build
-        working-directory: ./quiz-app
+        working-directory: ./quiz-application
 
               # Setup sonar-scanner
       - name: Setup SonarQube
