@@ -99,9 +99,14 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=
+            -Dsonar.sources=.
             -Dsonar.verbose=true
-          
+
+
+import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.rules.Rule;
+        final RulesProfile profile = RulesProfile.create("sonar way", "java");
 
   frontend-security:
     needs: frontend-test
