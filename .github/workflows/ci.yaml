@@ -75,7 +75,7 @@ jobs:
       - name: Install project dependencies 
         working-directory: ./backend
         run: |
-          npm i
+          npm install
           npm run lint
           npm install --save-dev --save-exact prettier
           npm run prettier
