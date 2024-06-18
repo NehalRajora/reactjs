@@ -43,9 +43,6 @@ jobs:
         distribution: 'temurin' # See 'Supported distributions' for available options
         java-version: '17'
 
-              # Setup sonar-scanner
-      - name: Setup SonarQube
-        uses: ./
 
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
@@ -60,19 +57,34 @@ jobs:
 
 
         #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Run sonar-scanner
-        - name: SonarQube Scan
-          run: sonar-scanner
+
+         # Setup sonar-scanner
+      - name: Setup SonarQube
+        uses: ./
+
+      # Run scanner
+      - name: Sonar Scan
+        env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: quiz-app
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.host.url=${{ secrets.SONAR_URL }}
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=$GITHUB_WORKSPACE
-            -Dsonar.verbose=true
+        run: sonar-scanner
+          -Dsonar.host.url=${{ secrets.SONAR_URL }}
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+          -Dsonar.sources=$GITHUB_WORKSPACE
+          -Dsonar.verbose=true
+        # # Run sonar-scanner
+        # - name: SonarQube Scan
+        #   run: sonar-scanner
+          
+        # with:
+        #   projectBaseDir: quiz-app
+        #   args: >
+        #     -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+        #     -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+        #     -Dsonar.host.url=${{ secrets.SONAR_URL }}
+        #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            
         
   backend-test:
     runs-on: ubuntu-latest
