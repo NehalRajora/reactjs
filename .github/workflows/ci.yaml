@@ -102,12 +102,6 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.verbose=true
 
-
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.Rule;
-        final RulesProfile profile = RulesProfile.create("sonar way", "java");
-
   frontend-security:
     needs: frontend-test
     runs-on: ubuntu-latest
