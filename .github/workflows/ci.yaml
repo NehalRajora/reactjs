@@ -12,12 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: action/checkout@master
         with:
           fetch-depth: 0
 
       # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
-      - uses: actions/setup-java@v3
+      - uses: action/setup-java@v3
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
