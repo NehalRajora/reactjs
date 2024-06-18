@@ -37,18 +37,49 @@ jobs:
         run: npm run build
         working-directory: ./quiz-app
 
+
+
+
+
+
+
+    # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
+    # Setup sonar-scanner
+    - name: Setup SonarQube
+      uses: warchant/setup-sonar-scanner@v7
+    # Run sonar-scanner
+    - name: SonarQube Scan
+      run: sonar-scanner
+           -Dsonar.host.url=${{ secrets.SONAR_URL }}
+           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+           -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+           -Dsonar.sources=$GITHUB_WORKSPACE
+
+
               # Setup sonar-scanner
       - name: Setup SonarQube
-        uses: warchant/setup-sonar-scanner@v8
+        uses: warchant/setup-sonar-scanner@v7
 
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
         
+        # I have added this 
         - name: Push changes
         uses: ad-m/github-push-action@master
         with:
         github_token: ${{ secrets.PAT}}
+         # till here
+
+
+      # Run sonar-scanner
+    - name: SonarQube Scan
+      run: sonar-scanner
 
         #GITHUB_TOKEN: ${{ secrets._GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -59,7 +90,7 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=src/
+            -Dsonar.sources=$GITHUB_WORKSPACE
             -Dsonar.verbose=true
         
   backend-test:
@@ -91,16 +122,17 @@ jobs:
 
               # Setup sonar-scanner
       - name: Setup SonarQube
-        uses: warchant/setup-sonar-scanner@v8
+        uses: warchant/setup-sonar-scanner@v7
 
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-
+      # i have added this
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.PAT}}
+      # to till here 
 
         #  GITHUB_TOKEN: ${{ secrets._GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -111,7 +143,7 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=.
+            -Dsonar.sources=$GITHUB_WORKSPACE
             -Dsonar.verbose=true
 
   frontend-security:
@@ -277,4 +309,4 @@ jobs:
         with:
           file: kubernetes-manifest/
           args: --severity-threshold=high
-#
+# 
