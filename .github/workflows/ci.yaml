@@ -36,10 +36,14 @@ jobs:
         run: npm run build
         working-directory: ./quiz-app
 
-              # Setup sonar-scanner
-      - name: Setup SonarQube
-        uses: warchant/setup-sonar-scanner@v8
+        # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
 
+              # Setup sonar-scanner
+      
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -53,6 +57,11 @@ jobs:
 
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          - name: Setup SonarQube
+        uses: warchant/setup-sonar-scanner@v7
+          # Run sonar-scanner
+    - name: SonarQube Scan
+      run: sonar-scanner
         with:
           projectBaseDir: quiz-app
           args: >
@@ -92,7 +101,7 @@ jobs:
 
               # Setup sonar-scanner
       - name: Setup SonarQube
-        uses: warchant/setup-sonar-scanner@v8
+        uses: warchant/setup-sonar-scanner@v7
 
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
