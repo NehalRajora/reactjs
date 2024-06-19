@@ -57,6 +57,7 @@ jobs:
 
       - name: Push changes
         uses: ad-m/github-push-action@master
+        env:
         with:
           github_token: ${{ secrets.PAT}}
 
@@ -110,6 +111,7 @@ jobs:
 
       - name: Push changes
         uses: ad-m/github-push-action@master
+        env:
         with:
           github_token: ${{ secrets.PAT}}
 
