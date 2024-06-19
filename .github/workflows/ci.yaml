@@ -39,6 +39,7 @@ jobs:
               # Setup sonar-scanner
       - name: Setup SonarQube
         uses: warchant/setup-sonar-scanner@v7
+
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -51,6 +52,8 @@ jobs:
          # till here
 
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Run scanner
+        - name: Sonar Scan
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: quiz-app
