@@ -43,8 +43,13 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           # I have added this 
+          - name: Push changes
+            uses: ad-m/github-push-action@master
+            with:
+            github_token: ${{ secrets.PAT}}
+          # till here
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: quiz-app
           args: >
@@ -89,8 +94,13 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           # I have added this 
+          - name: Push changes
+            uses: ad-m/github-push-action@master
+            with:
+            github_token: ${{ secrets.PAT}}
+          # till here
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: backend
           args: >
