@@ -56,8 +56,8 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=$GITHUB_WORKSPACE
-            -Dsonar.verbose=true
+            # -Dsonar.sources=src/
+            # -Dsonar.verbose=true
         
   backend-test:
     runs-on: ubuntu-latest
@@ -102,8 +102,8 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=$GITHUB_WORKSPACE
-            -Dsonar.verbose=true
+            # -Dsonar.sources=.
+            # -Dsonar.verbose=true
           
 
   frontend-security:
