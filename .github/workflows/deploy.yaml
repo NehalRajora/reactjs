@@ -49,11 +49,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # with:
-        #   projectBaseDir: quiz-app
-        #   args: >
-        #     -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-        #     -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+        with:
+          projectBaseDir: quiz-app
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
         #     -Dsonar.host.url=${{ secrets.SONAR_URL }}
         #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         #     -Dsonar.sources=src/
@@ -95,11 +95,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # with:
-        #   projectBaseDir: backend
-        #   args: >
-        #     -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-        #     -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+        with:
+          projectBaseDir: backend
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
         #     -Dsonar.host.url=${{ secrets.SONAR_URL }}
         #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         #     # -Dsonar.sources=.
