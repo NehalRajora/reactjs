@@ -74,15 +74,7 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-
-        # I have added this 
-      - name: Push changes
-          uses: ad-m/github-push-action@master
-          with:
-            github_token: ${{ secrets.PAT}}
-         # till here
-
-          #GITHUB_TOKEN: ${{ secrets.PAT}}
+        GITHUB_TOKEN: ${{ secrets.PAT}}
        # Run sonar-scanner
       - name: SonarQube Scan
         run: sonar-scanner    
@@ -132,13 +124,8 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-      # I have added this 
-      - name: Push changes
-            uses: ad-m/github-push-action@master
-            with:
-              github_token: ${{ secrets.PAT}}
-         # till here
-          #GITHUB_TOKEN: ${{ secrets.PAT}}
+
+        GITHUB_TOKEN: ${{ secrets.PAT}}
 
        # Run sonar-scanner
       - name: SonarQube Scan
