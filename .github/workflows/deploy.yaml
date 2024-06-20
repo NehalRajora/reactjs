@@ -2,11 +2,11 @@ name: React.js CI
 
 on:
   pull_request:
-    types:
-      - opened
+    workflow_dispatch:
+    types: [created]
     branches: 
       - "master"
-      - "main"
+
 
 jobs:
   frontend-test:
