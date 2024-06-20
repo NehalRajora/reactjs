@@ -2,11 +2,7 @@ name: React.js CI
 
 on:
   pull_request:
-    workflow_dispatch:
-    types: [created]
-    branches: 
-      - "master"
-
+    branches: "master"
 
 jobs:
   frontend-test:
@@ -21,11 +17,11 @@ jobs:
     steps:
       - name: Check-out git repository  
         uses: actions/checkout@v4
-      - name: Install Nodejs
+
+      - name: USE NODEJS ${{ matrix.node-version }} - ${{ matrix.architecture }}
         uses: actions/setup-node@v4
-        with:
-            node-version: '10.19.0'
-      - name: Install dependencies
+
+      - name: Install project dependencies 
         working-directory: ./quiz-app
         run: |
           npm i
@@ -35,33 +31,6 @@ jobs:
           npm test
         env:
           CI: true 
-# jobs:
-#   frontend-test:
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: ./quiz-app
-#     strategy:
-#       matrix:
-#         node-version: [20.x]
-#         architecture: [x64]
-#     steps:
-#       - name: Check-out git repository  
-#         uses: actions/checkout@v4
-
-#       - name: USE NODEJS ${{ matrix.node-version }} - ${{ matrix.architecture }}
-#         uses: actions/setup-node@v4
-
-#       - name: Install project dependencies 
-#         working-directory: ./quiz-app
-#         run: |
-#           npm i
-#           npm run lint
-#           npm install --save-dev --save-exact prettier
-#           npm run prettier
-#           npm test
-#         env:
-#           CI: true 
 
       - name: Build
         run: npm run build
@@ -74,19 +43,8 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-
-        # I have added this 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-            github_token: ${{ secrets.PAT}}
-         # till here
-
-          #GITHUB_TOKEN: ${{ secrets.PAT}}
-       # Run sonar-scanner
-      - name: SonarQube Scan
-        run: sonar-scanner    
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: quiz-app
           args: >
@@ -96,8 +54,7 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.sources=src/
             -Dsonar.verbose=true
-
-
+        
   backend-test:
     runs-on: ubuntu-latest
     defaults:
@@ -132,18 +89,8 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-      # I have added this 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PAT}}
-         # till here
-          #GITHUB_TOKEN: ${{ secrets.PAT}}
-
-       # Run sonar-scanner
-      - name: SonarQube Scan
-        run: sonar-scanner    
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: backend
           args: >
@@ -151,9 +98,9 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.sources=$GITHUB_WORKSPACE
+            -Dsonar.sources=.
             -Dsonar.verbose=true
-
+          
 
   frontend-security:
     needs: frontend-test
@@ -318,5 +265,3 @@ jobs:
         with:
           file: kubernetes-manifest/
           args: --severity-threshold=high
-
-#          
