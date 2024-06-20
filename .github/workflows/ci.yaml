@@ -66,13 +66,6 @@ jobs:
             -Dsonar.sources=src/
             -Dsonar.verbose=true
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        env:
-        with:
-          github_token: ${{ secrets.PAT}}
-
-
 
   backend-test:
     runs-on: ubuntu-latest
@@ -108,7 +101,7 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-        # I have added this 
+      # I have added this 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
