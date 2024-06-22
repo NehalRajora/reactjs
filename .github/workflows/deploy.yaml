@@ -48,10 +48,10 @@ jobs:
             distribution: 'temurin' 
             java-version: '17'
 
-      - name: sonar
-        with:
-        sonar.properties:
-          sonar.java.binaries= **/*.java
+      # - name: sonar
+      #   with:
+      #   sonar.properties:
+      #     sonar.java.binaries= **/*.java
 
       # Setup sonar-scanner
       - name: Setup SonarQube
@@ -70,6 +70,8 @@ jobs:
             -Dsonar.host.url=${{ secrets.SONAR_URL }}
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.sources=. \
+            -sonar.java.binaries= **/*.java
+
         #     -Dsonar.verbose=true
         
   backend-test:
