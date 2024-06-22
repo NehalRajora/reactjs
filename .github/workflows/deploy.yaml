@@ -48,10 +48,10 @@ jobs:
             distribution: 'temurin' 
             java-version: '17'
 
-      # - name: sonar
-      #   with:
-      #   sonar.properties:
-      #     sonar.java.binaries= **/*.java
+      - name: sonar
+        with:
+        sonar.properties:
+          sonar.java.binaries= **/*.java
 
       # Setup sonar-scanner
       - name: Setup SonarQube
