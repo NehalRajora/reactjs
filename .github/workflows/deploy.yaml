@@ -43,11 +43,14 @@ jobs:
 
 
        # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
             distribution: 'temurin' 
             java-version: '17'
-            
+
+        sonar.properties:
+          sonar.java.binaries= **/*.java
+
       # Setup sonar-scanner
       - name: Setup SonarQube
         uses: warchant/setup-sonar-scanner@v8
