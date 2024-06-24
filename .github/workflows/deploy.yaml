@@ -115,10 +115,10 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-        #     -Dsonar.host.url=${{ secrets.SONAR_URL }}
-        #     -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        #     # -Dsonar.sources=.
-        #     # -Dsonar.verbose=true
+            -Dsonar.host.url=${{ secrets.SONAR_URL }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.sources=.
+            -Dsonar.verbose=true
           
 
   frontend-security:
