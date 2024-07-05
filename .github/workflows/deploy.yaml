@@ -1,3 +1,4 @@
+
 name: React.js CI
 
 on:
@@ -35,16 +36,6 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: ./quiz-app
-
-
-         # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
-      - uses: actions/setup-java@v4
-        with:
-            distribution: 'temurin' 
-            java-version: '17'
-            cache: maven
-      - name: Build with maven Cloud
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=javareachabilityy      
 
               # Setup sonar-scanner
       - name: Setup SonarQube
@@ -99,7 +90,7 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets._GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: backend
